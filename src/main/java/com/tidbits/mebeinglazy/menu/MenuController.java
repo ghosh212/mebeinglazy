@@ -1,7 +1,10 @@
 package com.tidbits.mebeinglazy.menu;
 
-import org.springframework.web.bind.annotation.RestController;
+import com.tidbits.mebeinglazy.menu.maps.MyOwnMap;
 
-@RestController("/menu")
+
 public class MenuController {
+
+    MyOwnMap<String,Integer> newMap = new MyOwnMap<String,Integer>();
+    //call for map
 }

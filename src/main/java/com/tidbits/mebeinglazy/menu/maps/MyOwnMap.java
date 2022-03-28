@@ -2,7 +2,7 @@ package com.tidbits.mebeinglazy.menu.maps;
 
 import org.springframework.util.ObjectUtils;
 
-public class MyOwnMap<K, V> implements OwnMap<K,V>{
+public class MyOwnMap<K, V>{
 
     //default capacity for map
     private static int DEFAULT_CAPACITY = 16;
@@ -11,18 +11,36 @@ public class MyOwnMap<K, V> implements OwnMap<K,V>{
     //table to store the
     private LinkList<K,V>[] table;
 
-    MyOwnMap() {
+    static class LinkList<K,V> {
+
+        K key;
+        V value;
+        LinkList<K,V> next;
+
+        public LinkList(K key , V value){
+            this.key = key;
+            this.value = value;
+        }
+
+        public LinkList(K key, V value, LinkList<K,V> next){
+            this.key= key;
+            this.value = value;
+            this.next = next;
+        }
+    }
+
+     public MyOwnMap() {
         this(DEFAULT_CAPACITY);
     }
 
-    MyOwnMap(int capacity) {
+
+    public MyOwnMap(int capacity) {
         this.capacity = capacity;
 
          //Initialize "Hash Table" with initial capacity which is nothing but an Array,Each index of an array is called "Hash Bucket"
         this.table = new LinkList[capacity];
     }
 
-    @Override
     public void put(K key, V value) {
         if (ObjectUtils.isEmpty(key)){
             return;
@@ -52,7 +70,6 @@ public class MyOwnMap<K, V> implements OwnMap<K,V>{
         }
     }
 
-    @Override
     public V get(K key) {
         if (ObjectUtils.isEmpty(key)){
             return null;
@@ -75,7 +92,6 @@ public class MyOwnMap<K, V> implements OwnMap<K,V>{
 
     }
 
-    @Override
     public void printOwnMap(MyOwnMap<K,V> myOwnMap) {
         System.out.println(myOwnMap);
 
